@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const TodoForm = () => {
+const TodoForm = ({ addTodo }) => {
   const [value, setValue] = useState("");
   const [category, setCategory] = useState("");
 
@@ -9,8 +9,9 @@ const TodoForm = () => {
     if (!value || !category) return;
     // adicionar todo
     // limpar os campos
-    setValue("")
-    setCategory("")
+    addTodo(value, category)
+    setValue("");
+    setCategory("");
   };
 
   return (
@@ -21,10 +22,11 @@ const TodoForm = () => {
           type="text"
           placeholder="Digite o título"
           value={value}
+          name="titulo"
           onChange={(e) => setValue(e.target.value)}
         />
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
-          <option value="" defaultValue>
+        <select name="category" value={category} onChange={(e) => setCategory(e.target.value)}>
+          <option value>
             Selecione uma categoria
           </option>
           <option value="Trabalho">Trabalho</option>
